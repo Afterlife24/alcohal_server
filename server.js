@@ -118,7 +118,7 @@ app.post("/api/products/add", async (req, res) => {
 
 async function connectToMongo() {
     try {
-        client = new MongoClient(uri);
+        client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         await client.connect();
         db = client.db('Dhanush2002'); // Replace with your database name
         console.log('Connected to MongoDB');
@@ -140,12 +140,12 @@ const getDatabase = async () => {
 };
 
 // Delayed server start
-// function startServer() {
-//     const PORT = process.env.PORT || 5000;
-//     app.listen(PORT, () => {
-//         console.log(`Server is running on http://localhost:${PORT}`);
-//     });
-// }
+function startServer() {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
 
 // Endpoint to send the order
 app.post('/sendOrders', async (req, res) => {
