@@ -1,0 +1,22 @@
+name: Deploy template_expressjs in prod
+
+on:
+  push:
+    branches:
+    - main
+
+env:
+  NODE_VERSION: 18.x
+  SKIP_PREFLIGHT_CHECK: true
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: GoFastAPI Deploy
+          run: |
+            npx gofastapi login --auth-token=${{ secrets.GOFASTAPI_AUTH_TOKEN }}
+            npx gofastapi clean
+            npx gofastapi deploy
