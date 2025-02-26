@@ -140,12 +140,12 @@ const getDatabase = async () => {
 };
 
 // Delayed server start
-function startServer() {
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}
+// function startServer() {
+//     const PORT = process.env.PORT || 5000;
+//     app.listen(PORT, () => {
+//         console.log(`Server is running on http://localhost:${PORT}`);
+//     });
+// }
 
 // Endpoint to send the order
 app.post('/sendOrders', async (req, res) => {
