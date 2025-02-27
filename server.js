@@ -18,6 +18,7 @@
 
 
 
+
 //   app.get('/api/products/:id/quantity', async (req, res) => {
 //     const { id } = req.params;
 //     // console.log(`Received request to fetch quantity for product: ${id}`);
@@ -140,12 +141,12 @@
 // };
 
 // // Delayed server start
-// function startServer() {
-//     const PORT = process.env.PORT || 5000;
-//     app.listen(PORT, () => {
-//         console.log(`Server is running on http://localhost:${PORT}`);
-//     });
-// }
+// // function startServer() {
+// //     const PORT = process.env.PORT || 5000;
+// //     app.listen(PORT, () => {
+// //         console.log(`Server is running on http://localhost:${PORT}`);
+// //     });
+// // }
 
 // // Endpoint to send the order
 // app.post('/sendOrders', async (req, res) => {
@@ -447,7 +448,7 @@ let db;
 let client;
 
 
-const uri = "mongodb+srv://Suraj:alcohal2002@suraj.2fxoc.mongodb.net/?retryWrites=true&w=majority&appName=suraj";
+const uri = "mongodb+srv://Dhanush2002:Dhanush2002@cluster0.ool5p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Connect to MongoDB
 async function connectToMongo() {
@@ -458,7 +459,7 @@ async function connectToMongo() {
             serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
         });
         await client.connect();
-        db = client.db('alcohal'); // Replace 'Dhanush6371' with your database name
+        db = client.db('Dhanush2002'); // Replace 'Dhanush6371' with your database name
         console.log('Connected to MongoDB');
         startServer(); // Start the server only after MongoDB connection is successful
     } catch (err) {
