@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -14,9 +15,44 @@ app.use(bodyParser.json());
 let db;
 let client;
 
+
 const uri = "mongodb+srv://Suraj:alcohal2002@suraj.2fxoc.mongodb.net/?retryWrites=true&w=majority&appName=suraj";
 
+// Connect to MongoDB
+async function connectToMongo() {
+    try {
+        client = new MongoClient(uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
+        });
+        await client.connect();
+        db = client.db('alcohal'); // Replace 'Dhanush6371' with your database name
+        console.log('Connected to MongoDB');
+        startServer(); // Start the server only after MongoDB connection is successful
+    } catch (err) {
+        console.error('Error connecting to MongoDB:', err);
+        setTimeout(connectToMongo, 3000); // Retry connection after 5 seconds
+    }
+}
 
+
+
+// Helper function to get database
+const getDatabase = async () => {
+    if (!db) {
+        await connectToMongo();
+    }
+    return db;
+};
+
+//Delayed server start
+// function startServer() {
+//     const PORT = process.env.PORT || 5000;
+//     app.listen(PORT, () => {
+//         console.log(`Server is running on http://localhost:${PORT}`);
+//     });
+// }
 
 
   app.get('/api/products/:id/quantity', async (req, res) => {
@@ -117,36 +153,6 @@ app.post("/api/products/add", async (req, res) => {
     }
 });
 
-async function connectToMongo() {
-    try {
-        client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        await client.connect();
-        db = client.db('alcohal'); // Replace with your database name
-        console.log('Connected to MongoDB');
-        startServer();
-    } catch (err) {
-        console.error('Error connecting to MongoDB:', err);
-        setTimeout(connectToMongo, 3000); // Retry connection after 3 seconds
-    }
-}
-
-
-
-// Helper function to get database
-const getDatabase = async () => {
-    if (!db) {
-        await connectToMongo();
-    }
-    return db;
-};
-
-// Delayed server start
-// function startServer() {
-//     const PORT = process.env.PORT || 5000;
-//     app.listen(PORT, () => {
-//         console.log(`Server is running on http://localhost:${PORT}`);
-//     });
-// }
 
 // Endpoint to send the order
 app.post('/sendOrders', async (req, res) => {
@@ -414,20 +420,12 @@ app.post('/verify', (req, res) => {
 
 
 
+
+
+
 // Initialize MongoDB connection
 connectToMongo();
 
 
 
 module.exports = app;
-
-
-
-
-
-
-
-
-
-
-
