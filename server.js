@@ -16,7 +16,7 @@ let db;
 let client;
 
 
-const uri = "mongodb+srv://Dhanush2002:Dhanush2002@cluster0.ool5p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = "mongodb+srv://Suraj:alcohal2002@suraj.2fxoc.mongodb.net/?retryWrites=true&w=majority&appName=suraj";
 
 // Connect to MongoDB
 async function connectToMongo() {
@@ -27,7 +27,7 @@ async function connectToMongo() {
             serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
         });
         await client.connect();
-        db = client.db('Dhanush2002'); // Replace 'Dhanush6371' with your database name
+        db = client.db('alcohal'); // Replace 'Dhanush6371' with your database name
         console.log('Connected to MongoDB');
         startServer(); // Start the server only after MongoDB connection is successful
     } catch (err) {
